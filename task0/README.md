@@ -18,7 +18,6 @@ Follow the instruction below to build the attached C++ code. This code will disp
 
 
 
-
 ----
 
 
