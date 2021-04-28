@@ -38,7 +38,7 @@ $ git submodule update --init 3rd_party/delfem2
 
 === Paste the screen shot here`![](<image file name>)` ===
 
-![problem1](task1_p1_result.png)
+![problem1](task1_p1_result.png) 
 
 ## Problem 2
 
