@@ -37,8 +37,7 @@ $ git submodule update --init 3rd_party/delfem2
    
 
 === Paste the screen shot here`![](<image file name>)` ===
-
-
+![problem1](<task1_p1_result.png)
 
 ## Problem 2
 
@@ -47,4 +46,4 @@ Modify `main.cpp` to collide points with the circular obstacle in the middle (se
 
 === Paste the screen shot here`![](<image file name>)`  ===
 
-
+![problem2](<task1_p2_result.png)

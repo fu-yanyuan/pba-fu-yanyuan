@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <cstdio>
 
+float M_PI = 3.14159265358979323846;
+
 // print out error
 static void error_callback(int error, const char* description){
   fputs(description, stderr);
@@ -90,10 +92,10 @@ void simulate(
         float vnorm = p.velo[0]*norm[0] + p.velo[1]*norm[1]; // normal component of the velocity
         ////////////////////////////
         // write something below !
-//        p.velo[0] =
-//        p.velo[1] =
-//        p.pos[0] =
-//        p.pos[1] =
+       p.velo[0] =  p.velo[0] - 2*(p.velo[0]*norm[0]+p.velo[1]*norm[1])*norm[0];
+       p.velo[1] =  p.velo[1] - 2*(p.velo[0]*norm[0]+p.velo[1]*norm[1])*norm[1];
+       p.pos[0] = 0.4*norm[0] - dx + 0.5;
+       p.pos[1] = 0.4*norm[1] - dy + 0.5;
       }
     }
   }
