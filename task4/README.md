@@ -27,7 +27,7 @@ Compile the `main.cpp` using the `cmake` on the `CMakeLists.txt` . Run the progr
 
 === paste screenshot here ===
 
-
+![task4_p1_result.png](task4_p1_result.png)
 
 ## Problem 2
 
@@ -35,7 +35,7 @@ Using the **Sort & Sweep Method**, implement the fast collision detection betwee
 
 === paste screenshot here ===
 
-
+![task4_p2_result.png](task4_p2_result.png)
 
 
 
