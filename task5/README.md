@@ -28,7 +28,7 @@ Build the `main.cpp` using `cmake`. Run the program and take a screenshot image 
 
 === paste screenshot here ===
 
-
+![result1](result1.png)
 
 
 ## Problem 2
@@ -48,7 +48,7 @@ Write some code around line #31 in the `main.cpp`. **Once the implementation is 
 
 === paste screenshot image here ===
 
-  
+![result2](result2.png) 
 
 
 
