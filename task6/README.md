@@ -35,7 +35,7 @@ Build the `main.cpp` using `cmake`. Run the program and take a screenshot image 
 
 You will probably see a **highly distorted polygon shrinking **, but that's OK. 
 
-
+![p1](result1.png)
 
 ## Problem 2
 
@@ -55,7 +55,7 @@ If the code working well, you will see that **the enrgy steadly deceases to the 
 
 === paste screenshot here ===
 
-
+![p2](result2.png)
 
 
 
