@@ -32,7 +32,7 @@ Build the `main.cpp` using `cmake`. Run the program and take a screenshot image 
 
 === paste screenshot here ===
 
-
+![result1](result1.png)
 
 
 ## Problem 2
@@ -51,7 +51,7 @@ The following slides **may be** useful for this assignments:
 
 Report the energy after convergence: 
 
-- converged energy = ?????
+- converged energy = 100
 
 
 
@@ -59,7 +59,7 @@ Paste the resulting screenshot image below:
 
 === paste screenshot image here ===
 
-  
+![result2](result2.png)  
 
 
 
