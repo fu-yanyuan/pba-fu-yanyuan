@@ -40,6 +40,7 @@ Build the program using `cmake`.
 Run the program and take a screenshot image of the window. Paste the screenshot image below by editing this mark down document:
 
 === paste screenshot here ===  
+
 ![](restult.png)
 
 ## Problem 2
@@ -63,7 +64,7 @@ Paste the screenshot image below:
 
 === paste screenshot here ===
 
-![](result2).png)
+![](result2.png)
 
 The following slides may be useful:
 
