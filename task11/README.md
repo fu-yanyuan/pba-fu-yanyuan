@@ -54,16 +54,20 @@ The inertia tensor should computed for the **rotation around the origin of the c
 The line in red, blue and green are the principal axes of the inertia tensor.
 
 Write down the eigenvalues of the inertia tensor below (they will be shown in the standard output):
-- 1st eigenvalue: 8.96759e+07  
-- 2nd eigenvalue: 1.8092e+08
-- 3rd eigenvalue: 2.34692e+08
+- 1st eigenvalue: 8.96759e+07  --> 8.99708e+07
+- 2nd eigenvalue: 1.8092e+08  --> 1.81256e+08
+- 3rd eigenvalue: 2.34692e+08  --> 2.35006e+08
 
 
 Paste the screenshot image below:
 
 === paste screenshot here ===
 
-![](result2.png)
+![](result2.png)  
+
+my second submit:
+
+![](result2_revised.png)
 
 The following slides may be useful:
 
