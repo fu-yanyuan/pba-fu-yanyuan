@@ -164,13 +164,58 @@ int main()
         }
 
 
-        // std::cout << iq << std::endl;
-        // for (unsigned int j=0;j<flag.size();j++)
-        // {
-        //   std::cout << " f=" << flag[j];
+        //update 
+        // for(unsigned int j=0;j<4;++j){
+        //   //if(flag[aQuad[iq*4+j]*2] == 1){continue;}
+        //   Eigen::Vector2f Xupdate = Ropt*aq[j] - topt;
+        //   if(aXYt[aQuad[iq*4+j]*2] != Xupdate[0]){aXYt[aQuad[iq*4+j]*2] = Xupdate[0];flag[aQuad[iq*4+j]*2] += 1;}
+        //   if(aXYt[aQuad[iq*4+j]*2+1] != Xupdate[1]){aXYt[aQuad[iq*4+j]*2+1] = Xupdate[1];flag[aQuad[iq*4+j]*2+1] += 1;}
+        //   // flag[aQuad[iq*4+j]*2] += 1;
+        //   // flag[aQuad[iq*4+j]*2+1] += 1;
         // }
-        // std::cout << std::endl;
 
+        
+        // for(unsigned int j=0;j<4;j++){
+        //   Eigen::Vector2f Xupdate = Ropt*aq[j] - topt;
+        //   if(flag[aQuad[iq*4+j]*2]>=1){continue;}
+        //   aXYt_update[aQuad[iq*4+j]*2] = Xupdate[0];
+        //   aXYt_update[aQuad[iq*4+j]*2+1] = Xupdate[1];
+        //   flag[aQuad[iq*4+j]*2] += 1;
+        //   flag[aQuad[iq*4+j]*2+1] += 1;          
+        // }
+        
+      //  for(unsigned int j=0;j<4;j++){
+      //     Eigen::Vector2f Xupdate = Ropt*aq[j] - topt;
+      //     //if(flag[aQuad[iq*4+j]*2]>=1){continue;}
+      //     aXYt[aQuad[iq*4+j]*2] = Xupdate[0];
+      //     aXYt[aQuad[iq*4+j]*2+1] = Xupdate[1];
+      //     flag[aQuad[iq*4+j]*2] += 1;
+      //     flag[aQuad[iq*4+j]*2+1] += 1;          
+      //   }
+
+
+        std::cout << iq << std::endl;
+        for (unsigned int j=0;j<flag.size();j++)
+        {
+          std::cout << " f=" << flag[j];
+        }
+        std::cout << std::endl;
+
+        // std:: cout << " = " << std::endl << ap[0] << std::endl;
+        // std:: cout << "iq = " << std::endl << iq << std::endl;
+        // std:: cout << "aQuad[iq*4+0]*2 " << std::endl << aQuad[iq*4+0]*2 << std::endl;
+        // std:: cout << "(aXY0.data()+aQuad[iq*4+0]*2) " << std::endl << Eigen::Map<Eigen::Vector2f>(aXYt.data()+aQuad[iq*4+0]*2) << std::endl;
+        // std:: cout << "ap = " << std::endl << ap[0] << std::endl;
+        // std::cout << "axyt x" << std::endl << aXYt[aQuad[iq*4+0]*2] << std::endl;
+        // std::cout << "axyt y" << std::endl << aXYt[aQuad[iq*4+0]*2+1] << std::endl;
+
+
+
+        
+        // no edits further down
+      }
+      //aXYt = aXYt_update;
+      // aXY0 = aXYt;
       for(unsigned int ixy=0;ixy<aXY.size()/2;++ixy) { // update position and velocities
         aUV[ixy*2+0] = (aXYt[ixy*2+0] - aXY[ixy*2+0])/dt;
         aUV[ixy*2+1] = (aXYt[ixy*2+1] - aXY[ixy*2+1])/dt;
@@ -194,11 +239,33 @@ int main()
       ::glVertex2fv(aXY.data()+aQuad[iq*4+0]*2);
       ::glColor3d(0,0,0);
 
+     
+
+      // ::glVertex2fv(aNO.data()+iq*4+0);
+      // ::glVertex2fv(aNO.data()+iq*4+1);
+      // ::glVertex2fv(aNO.data()+iq*4+1);
+      // ::glVertex2fv(aNO.data()+iq*4+2);
+      // ::glVertex2fv(aNO.data()+iq*4+2);
+      // ::glVertex2fv(aNO.data()+iq*4+3);
+      // ::glVertex2fv(aNO.data()+iq*4+3);
+      // ::glVertex2fv(aNO.data()+iq*4+0);
     }
     ::glEnd();
     viewer.SwapBuffers();
     glfwPollEvents();
 
+    // for(unsigned int k=0;k<aXY.size()/2;++k){
+    //   std::cout << "x = " << aXY[k*2+0] << "  y = " << aXY[k*2+1] << std::endl;
+    // }
+    // for(unsigned int k=0;k<aXY.size()/2;++k){
+    //   std::cout << "xt = " << aXYt[k*2+0] << "  yt = " << aXYt[k*2+1] << std::endl;
+    // }
+    // for(unsigned int k=0;k<aXY.size()/2;++k){
+    //   std::cout << "vx = " << aUV[k*2+0] << "  vy = " << aUV[k*2+1] << std::endl;
+    // }
+
+    // c++;
+    // if(c==20){while(1);}
     
   }
   glfwDestroyWindow(viewer.window);
