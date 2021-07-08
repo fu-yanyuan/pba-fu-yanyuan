@@ -1,4 +1,3 @@
-
 #include "delfem2/glfw/viewer2.h"
 #include "delfem2/mshprimitive.h"
 #include <GLFW/glfw3.h>
@@ -76,8 +75,6 @@ int main()
   const std::vector<float> aXY0 = aXY; // rest shape
   std::vector<float> aUV(aXY.size(),0.0); // velocity
   std::vector<float> aXYt(aXY.size(),0.0); // tentative shape
-  std::vector<float> aXYt_update = aXY;
-  std::vector<float> aNO(aQuad.size(), 0.0);
   float dt = 0.03;
   // ---------
   delfem2::glfw::CViewer2 viewer;
@@ -91,7 +88,7 @@ int main()
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
   // ------
   viewer.InitGL();
-  unsigned int c = 0;
+
   while (!glfwWindowShouldClose(viewer.window))
   {
     { // animation using Shape Matching Deformation [Müller et al. 2005]
@@ -106,25 +103,6 @@ int main()
         aXYt[ixy*2+0] = aXY[ixy*2+0] + dt*aUV[ixy*2+0];
         aXYt[ixy*2+1] = aXY[ixy*2+1] + dt*aUV[ixy*2+1];
       }
-        std::vector<int> flag(aXY.size(),0);
-        std::cout << "aXY.size() = " << aXY.size() << std::endl;
-        std::cout << "aQuad.size() = " << aQuad.size() << std::endl;
-
-        for(unsigned k=0;k<aXY.size();++k){
-          std::cout << " f=" << flag[k];
-        }
-        std::cout << std::endl;
-
-        // // print out aMass
-        // for(unsigned k=0;k<aXY.size()/2;++k){
-        //   std::cout << "am" << k << "=" << aMass[k] << std::endl;
-        // }
-
-        // // print out aUV
-        // for(unsigned int k=0;k<aUV.size();++k){
-        //   std::cout << "aUV" << k << "=" << aUV[k] << std::endl;
-        // }
-
       for(unsigned int iq=0;iq<aQuad.size()/4;++iq){
         const Eigen::Vector2f ap[4] = { // coordinates of quad's corner points (tentative shape)
             Eigen::Map<Eigen::Vector2f>(aXYt.data()+aQuad[iq*4+0]*2),
@@ -142,7 +120,7 @@ int main()
             aMass[aQuad[iq*4+2]],
             aMass[aQuad[iq*4+3]] };
         // write some code below to rigidly transform the points in the rest shape (`aq`) such that the
-        // weighted sum of squared distances against the points in the tentative shape (`ap`) is minimized (`am` is the weight).
+        // weighted sum of squared distances against the points in the tentative shape (`qp`) is minimized (`am` is the weight).
         Eigen::Vector2f tcg = (am[0]*ap[0]+am[1]*ap[1]+am[2]*ap[2]+am[3]*ap[3])/(am[0]+am[1]+am[2]+am[3]);
         Eigen::Vector2f Tcg = (am[0]*aq[0]+am[1]*aq[1]+am[2]*aq[2]+am[3]*aq[3])/(am[0]+am[1]+am[2]+am[3]);
         auto BAT = am[0]*(ap[0]-tcg)*(aq[0]-Tcg).transpose()+am[1]*(ap[1]-tcg)*(aq[1]-Tcg).transpose()+am[2]*(ap[2]-tcg)*(aq[2]-Tcg).transpose()+am[3]*(ap[3]-tcg)*(aq[3]-Tcg).transpose();
@@ -154,23 +132,16 @@ int main()
 
         //Eigen::MatrixXf Ropt = U*V.transpose();
         Eigen::MatrixXf Ropt = U*V.transpose();
-        Eigen::Vector2f topt = tcg - Ropt*Tcg;
-        Eigen::Vector2f update(topt.size(),0.0);
+        Eigen::Vector2f topt = tcg + Ropt*Tcg;
 
+        Eigen::Vector2f update(topt.size(),0.0);
         for(unsigned int j=0;j<4;++j){
-          update = Ropt*aq[j] - topt;
+          update = Ropt*aq[j] + topt;
           aXYt[aQuad[iq*4+j]*2] = update[0];
           aXYt[aQuad[iq*4+j]*2+1] = update[1];
         }
-
-
-        // std::cout << iq << std::endl;
-        // for (unsigned int j=0;j<flag.size();j++)
-        // {
-        //   std::cout << " f=" << flag[j];
-        // }
-        // std::cout << std::endl;
-
+        // no edits further down
+      }
       for(unsigned int ixy=0;ixy<aXY.size()/2;++ixy) { // update position and velocities
         aUV[ixy*2+0] = (aXYt[ixy*2+0] - aXY[ixy*2+0])/dt;
         aUV[ixy*2+1] = (aXYt[ixy*2+1] - aXY[ixy*2+1])/dt;
@@ -183,7 +154,6 @@ int main()
     ::glColor3d(0,0,0);
     ::glBegin(GL_LINES);
     for(unsigned int iq=0;iq<aQuad.size()/4;++iq){ // draw edges of quads
-      if(iq==0){::glColor3d(1,0,0);}
       ::glVertex2fv(aXY.data()+aQuad[iq*4+0]*2);
       ::glVertex2fv(aXY.data()+aQuad[iq*4+1]*2);
       ::glVertex2fv(aXY.data()+aQuad[iq*4+1]*2);
@@ -192,14 +162,10 @@ int main()
       ::glVertex2fv(aXY.data()+aQuad[iq*4+3]*2);
       ::glVertex2fv(aXY.data()+aQuad[iq*4+3]*2);
       ::glVertex2fv(aXY.data()+aQuad[iq*4+0]*2);
-      ::glColor3d(0,0,0);
-
     }
     ::glEnd();
     viewer.SwapBuffers();
     glfwPollEvents();
-
-    
   }
   glfwDestroyWindow(viewer.window);
   glfwTerminate();
