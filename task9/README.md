@@ -33,7 +33,7 @@ Paste the image below.
 
 === paste screenshot here ===
 
-
+![](result1.png)
 
 ## Problem 2
 
@@ -45,6 +45,7 @@ Paste the screenshot image of the program once it is finished.
 
 === paste screenshot here ===
 
+![](result2.png)
 
 ## Material 
 

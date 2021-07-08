@@ -132,7 +132,7 @@ int main()
 
         //Eigen::MatrixXf Ropt = U*V.transpose();
         Eigen::MatrixXf Ropt = U*V.transpose();
-        Eigen::Vector2f topt = tcg + Ropt*Tcg;
+        Eigen::Vector2f topt = tcg - Ropt*Tcg;
 
         Eigen::Vector2f update(topt.size(),0.0);
         for(unsigned int j=0;j<4;++j){
