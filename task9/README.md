@@ -33,7 +33,7 @@ Paste the image below.
 
 === paste screenshot here ===
 
-
+![](result1.png)
 
 ## Problem 2
 
